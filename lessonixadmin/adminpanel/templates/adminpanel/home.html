@@ -48,7 +48,7 @@
                 <p class="lastReportTitle">
                     Останній звіт
                 </p>
-                <p>IMG</p>
+                <img src="{% static 'img/last-report-ico.png' %}" alt="School Icon">
                 <p class="lastReportDate">
                     За 01/10 →
                 </p>
@@ -65,7 +65,9 @@
                         </p>
                     </div>
                     <div class="proceedButton">
-                        <p>→</p>
+                        <a href="/">
+                            <p>→</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -74,71 +76,5 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Update current date
-    document.getElementById("currentDate").textContent = new Date().toLocaleDateString();
-
-    // Initialize the Chart.js Bar Chart
-    const ctx = document.getElementById('attendanceChart').getContext('2d');
-    const attendanceChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'], // Days of the week
-            datasets: [{
-                label: 'Відвідуваність',
-                data: [240, 200, 260, 240, 120, 40, 20], // Attendance data
-                backgroundColor: 'rgba(211, 211, 211, 0.8)', // Bar fill color
-                borderColor: '#000000', // Bar border color
-                borderWidth: 2,
-                borderRadius: 5,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                tooltip: {
-                    enabled: false // Disable hover tooltips
-                },
-                legend: {
-                    display: false, // Hide legend
-                },
-            },
-            scales: {
-                x: {
-                    grid: {
-                        display: false, // Remove vertical grid lines
-                    },
-                    ticks: {
-                        font: {
-                            size: 14,
-                            weight: 600,
-                        }
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    max: 300, // Maximum Y-axis value
-                    ticks: {
-                        stepSize: 40, // Step size for Y-axis
-                        font: {
-                            size: 14,
-                            weight: 600,
-                        },
-                        callback: function(value, index, ticks) {
-                            if (value === 300) {
-                                return ''; // Hide maximum value
-                            }
-                            return value; // Display all other values
-                        }
-                    },
-                    grid: {
-                        display: false, // Remove horizontal grid lines
-                        drawBorder: false, // Remove border line
-                    },
-                },
-            },
-        }
-    });
-</script>
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock content %}

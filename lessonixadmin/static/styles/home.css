@@ -13,7 +13,7 @@ body {
 
 .header {
     display: flex;
-    flex: 0 0 20%;
+    flex: 0 0 17%;
     width: 100%;
 }
 
@@ -22,14 +22,14 @@ body {
 }
 
 .schoolName {
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 700;
     margin-top: 5px;
     margin-bottom: 0px;
 }
 
 .date {
-    font-size: 20px;
+    font-size: 25px;
     margin-top: 2px;
 }
 
@@ -54,7 +54,7 @@ body {
 
 .lower {
     display: flex;
-    flex: 0 0 80%;
+    flex: 0 0 83%;
     width: 100%;
 }
 
@@ -62,12 +62,12 @@ body {
     margin-left: 50px;
     display: flex;
     flex-direction: column;
-    flex: 0 0 70%;
+    flex: 0 0 75%;
 }
 
 .liveStatistics {
     display: flex;
-    flex: 0 0 25%;
+    flex: 0 0 30%;
     justify-content: space-between;
 }
 
@@ -85,19 +85,19 @@ body {
 }
 
 .studentsCounter, .lessonsCounter, .absentCounter {
-    font-size: calc(14px + 0.5vw);
+    font-size: 35px;
     font-weight: 600;
     margin: 0px;
 }
 
 .studentsDesc, .lessonsDesc, .absentDesc {
-    font-size: calc(10px + 0.5vw);
+    font-size: 20px;
     margin: 0px;
     margin-top: 10px;
 }
 
 .dailyStatistics {
-    flex: 0 0 75%;
+    flex: 0 0 70%;
     margin-top: 10px;
     border: 3px solid #000000;
     border-radius: 10px;
@@ -107,7 +107,7 @@ body {
 }
 
 .tableTitle {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
     margin-top: 10px;
     margin-left: 10%;
@@ -119,7 +119,6 @@ body {
     justify-content: center;
     align-items: flex-end;
     width: 100%;
-    margin-bottom: 20px;
     position: relative;
 }
 
@@ -137,13 +136,13 @@ body {
 .reportsAndSchedule {
     display: flex;
     flex-direction: column;
-    flex: 0 0 30%;
+    flex: 0 0 25%;
 }
 
 .lastReport {
     display: flex;
     flex-direction: column;
-    flex: 0 0 35%;
+    flex: 0 0 30%;
     align-items: center;
     align-self: center;
     text-align: center;
@@ -154,14 +153,24 @@ body {
 }
 
 .lastReportTitle {
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 27px;
+    font-weight: 700;
+    margin: 15px;
+}
+
+.lastReport img {
+    width: 100px;
+    height: auto;
+}
+
+.lastReportDate {
+    margin: 5px;
 }
 
 .schedule {
     display: flex;
     flex-direction: column;
-    flex: 0 0 65%;
+    flex: 0 0 70%;
     align-items: center;
     align-self: center;
     margin-top: 15px;
@@ -172,13 +181,24 @@ body {
 }
 
 .scheduleTitle {
-    font-size: 25px;
+    margin: 20px;
+    font-size: 27px;
     font-weight: 600;
 }
 
 .singleEvent {
     display: flex;
     width: 70%;
+}
+
+.time {
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.eventTitle {
+    margin-top: 0px;
+    font-weight: 600;
 }
 
 .description {
@@ -189,4 +209,11 @@ body {
 
 .proceedButton {
     flex: 0 0 10%;
+}
+
+.proceedButton p {
+    font-size: 30px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0;
 }
