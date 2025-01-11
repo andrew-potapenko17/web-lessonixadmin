@@ -1,0 +1,144 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="mainContent">
+    <div class="header">
+        <div class="schoolAndStatus">
+            <p class="schoolName">
+                Вишнівський ліцей "ІДЕАЛ"
+            </p>
+            <p class="date" id="currentDate"> <!-- To be updated by JS -->
+                01/10/2025
+            </p>
+        </div>
+
+        <div class="profileImage">
+            <a href="/">
+                <img src="{% static 'img/circle-school-ico.png' %}" alt="School Icon">
+            </a>
+        </div>
+    </div>
+    <div class="lower">
+        <div class="statistics">
+            <div class="liveStatistics">
+                <div class="studentsNow">
+                    <p class="studentsCounter">185</p>
+                    <p class="studentsDesc">Учнів в школі</p>
+                </div>
+                <div class="lessonsNow">
+                    <p class="lessonsCounter">6</p>
+                    <p class="lessonsDesc">Уроків в [LIVE]</p>
+                </div>
+                <div class="absentNow">
+                    <p class="absentCounter">12</p>
+                    <p class="absentDesc">Відсутні без причини</p>
+                </div>
+            </div>
+            <div class="dailyStatistics">
+                <p class="tableTitle">Відвідуваність учнів</p>
+                <div class="circleWrapper">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="reportsAndSchedule">
+            <div class="lastReport">
+                <p class="lastReportTitle">
+                    Останній звіт
+                </p>
+                <p>IMG</p>
+                <p class="lastReportDate">
+                    За 01/10 →
+                </p>
+            </div>
+            <div class="schedule">
+                <p class="scheduleTitle">Події в закладі</p>
+                <div class="singleEvent">
+                    <div class="description">
+                        <p class="time">
+                            16:30 - 18:00
+                        </p>
+                        <p class="eventTitle">
+                            Нарада
+                        </p>
+                    </div>
+                    <div class="proceedButton">
+                        <p>→</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Update current date
+    document.getElementById("currentDate").textContent = new Date().toLocaleDateString();
+
+    // Initialize the Chart.js Bar Chart
+    const ctx = document.getElementById('attendanceChart').getContext('2d');
+    const attendanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'], // Days of the week
+            datasets: [{
+                label: 'Відвідуваність',
+                data: [240, 200, 260, 240, 120, 40, 20], // Attendance data
+                backgroundColor: 'rgba(211, 211, 211, 0.8)', // Bar fill color
+                borderColor: '#000000', // Bar border color
+                borderWidth: 2,
+                borderRadius: 5,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    enabled: false // Disable hover tooltips
+                },
+                legend: {
+                    display: false, // Hide legend
+                },
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false, // Remove vertical grid lines
+                    },
+                    ticks: {
+                        font: {
+                            size: 14,
+                            weight: 600,
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    max: 300, // Maximum Y-axis value
+                    ticks: {
+                        stepSize: 40, // Step size for Y-axis
+                        font: {
+                            size: 14,
+                            weight: 600,
+                        },
+                        callback: function(value, index, ticks) {
+                            if (value === 300) {
+                                return ''; // Hide maximum value
+                            }
+                            return value; // Display all other values
+                        }
+                    },
+                    grid: {
+                        display: false, // Remove horizontal grid lines
+                        drawBorder: false, // Remove border line
+                    },
+                },
+            },
+        }
+    });
+</script>
+{% endblock content %}

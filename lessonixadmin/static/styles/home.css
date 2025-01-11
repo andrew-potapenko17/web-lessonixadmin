@@ -1,0 +1,192 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.mainContent {
+    margin-left: 220px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+}
+
+.header {
+    display: flex;
+    flex: 0 0 20%;
+    width: 100%;
+}
+
+.header p {
+    margin-left: 50px;
+}
+
+.schoolName {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.date {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.schoolAndStatus {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 85%;
+}
+
+.profileImage {
+    display: flex;
+    flex: 0 0 15%;
+    justify-content: flex-end;
+}
+
+.profileImage img {
+    width: 120px;
+    height: auto;
+    margin-right: 8%;
+    margin-bottom: 7%;
+}
+
+.lower {
+    display: flex;
+    flex: 0 0 80%;
+    width: 100%;
+}
+
+.statistics {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 70%;
+}
+
+.liveStatistics {
+    display: flex;
+    flex: 0 0 25%;
+    justify-content: space-between;
+}
+
+.studentsNow, .lessonsNow, .absentNow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    width: 28%;
+    height: 85%;
+    box-sizing: border-box;
+}
+
+.studentsCounter, .lessonsCounter, .absentCounter {
+    font-size: calc(14px + 0.5vw);
+    font-weight: 600;
+    margin: 0px;
+}
+
+.studentsDesc, .lessonsDesc, .absentDesc {
+    font-size: calc(10px + 0.5vw);
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.dailyStatistics {
+    flex: 0 0 75%;
+    margin-top: 10px;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.tableTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 10px;
+}
+
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.circleWrapper {
+    width: 90%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.reportsAndSchedule {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+}
+
+.lastReport {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 35%;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    width: 70%;
+    height: 70%;
+    border: 3px solid #000000;
+    border-radius: 10px;
+}
+
+.lastReportTitle {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.schedule {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 65%;
+    align-items: center;
+    align-self: center;
+    margin-top: 15px;
+    width: 70%;
+    height: 80%;
+    border: 3px solid #000000;
+    border-radius: 10px;
+}
+
+.scheduleTitle {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.singleEvent {
+    display: flex;
+    width: 70%;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 90%;
+}
+
+.proceedButton {
+    flex: 0 0 10%;
+}
