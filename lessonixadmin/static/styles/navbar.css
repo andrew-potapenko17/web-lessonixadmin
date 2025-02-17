@@ -37,7 +37,9 @@ a {
 .links-container {
     flex: 0 0 80%;
     height: 100%;
+    margin-top: auto;
 }
+
 
 .classes-link, .personal-link, .statistics-link, .schedule-link, .reports-link {
     width: 171px;
@@ -48,7 +50,12 @@ a {
     margin: 20px 10px 20px 10px;
 }
 
+.classes-link {
+    margin-top: 60%;
+}
+
 .logout-container {
+    flex: 0 0 10%;
     display: flex;
     justify-content: center;
 }
