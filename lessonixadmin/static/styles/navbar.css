@@ -40,6 +40,11 @@ a {
     margin-top: auto;
 }
 
+.links-container img {
+    margin-left: 5%;
+    width: 35px;
+    height: auto;
+}
 
 .classes-link, .personal-link, .statistics-link, .schedule-link, .reports-link {
     width: 171px;
@@ -48,6 +53,15 @@ a {
     border-radius: 12px;
     display: inline-block;
     margin: 20px 10px 20px 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.links-text {
+    font-size: 20px;
+    line-height: 1;
 }
 
 .classes-link {
