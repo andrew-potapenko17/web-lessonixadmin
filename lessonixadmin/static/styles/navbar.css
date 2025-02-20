@@ -23,6 +23,8 @@ a {
     height: 100%;
 }
 
+/* Header */
+
 .header-title {
     flex: 0 0 10%;
 }
@@ -33,6 +35,8 @@ a {
     font-size: 27px;
     margin-top: 10px;
 }
+
+/* Links Container */
 
 .links-container {
     flex: 0 0 80%;
@@ -59,14 +63,25 @@ a {
     gap: 8px;
 }
 
+/* Additional Image Preferences If Needed */
+
+.personal-link img {
+    margin-left: 4%;
+    width: 40px;
+}
+
 .links-text {
     font-size: 20px;
     line-height: 1;
 }
 
+/* For Links Container Margin */
+
 .classes-link {
     margin-top: 60%;
 }
+
+/* Logout Container */
 
 .logout-container {
     flex: 0 0 10%;
