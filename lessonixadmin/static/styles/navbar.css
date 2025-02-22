@@ -65,6 +65,11 @@ a {
 
 /* Additional Image Preferences If Needed */
 
+.classes-link img {
+    margin-left: 4%;
+    width: 45px;
+}
+
 .personal-link img {
     margin-left: 4%;
     width: 40px;
