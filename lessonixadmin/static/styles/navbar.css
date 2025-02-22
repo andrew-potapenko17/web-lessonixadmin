@@ -70,6 +70,11 @@ a {
     width: 40px;
 }
 
+.reports-link img {
+    margin-left: 6%;
+    width: 30px;
+}
+
 .links-text {
     font-size: 20px;
     line-height: 1;
