@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Lessonix Admin</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class = "header">
+        <div class = "title">
+            <p>Lessonix Admin</p>
+        </div>
+    </div>
+    <div class = "main">
+        <div class = "form">
+            <h1>Вхід в систему</h1>
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <img src="{% static 'img/schoolid-placeholder.png' %}" alt="School Placeholder" class="input-icon-school">
+                    <input type="text" name="schoolid" placeholder="School ID" required />
+                </div>
+
+                <div class="input-group">
+                    <img src="{% static 'img/password-placeholder.png' %}" alt="Password Placeholder" class="input-icon-password">
+                    <input type="password" name="password" placeholder="Пароль" required />
+                </div>
+
+                <input type="submit" value="Увійти" class="button" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
