@@ -7,7 +7,7 @@
     <div class="header">
         <div class="schoolAndStatus">
             <p class="schoolName">
-                Вишнівський ліцей "ІДЕАЛ"
+                {{ SCHOOL_NAME }}
             </p>
             <p class="date" id="currentDate"> <!-- To be updated by JS -->
                 DD/MM/YYYY
@@ -24,15 +24,15 @@
         <div class="statistics">
             <div class="liveStatistics">
                 <div class="studentsNow">
-                    <p class="studentsCounter">185</p>
+                    <p class="studentsCounter" id="in_school"></p> <!-- To be updated by JS -->
                     <p class="studentsDesc">Учнів в школі</p>
                 </div>
                 <div class="lessonsNow">
-                    <p class="lessonsCounter">6</p>
+                    <p class="lessonsCounter" id="lessons_live"></p> <!-- To be updated by JS -->
                     <p class="lessonsDesc">Уроків в [LIVE]</p>
                 </div>
                 <div class="absentNow">
-                    <p class="absentCounter">12</p>
+                    <p class="absentCounter" id="absent_no_reason"></p> <!-- To be updated by JS -->
                     <p class="absentDesc">Відсутні без причини</p>
                 </div>
             </div>
@@ -75,6 +75,15 @@
     </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+    var schoolID = "{{ SCHOOL_ID }}";
+    var totalRegistered = {{ TOTAL_REGISTERED }};
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/firebase-config.js' %}"></script>
 <script src="{% static 'js/home.js' %}"></script>
 {% endblock content %}

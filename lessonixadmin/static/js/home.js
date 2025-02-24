@@ -66,3 +66,24 @@ const attendanceChart = new Chart(ctx, {
         },
     }
 });
+
+// Realtime values updating
+
+var inSchoolRef = firebase.database().ref("schools/" + schoolID + "/in_school");
+var lessonsLiveRef = firebase.database().ref("schools/" + schoolID + "/lessons_live");
+var absentNoReason = firebase.database().ref("schools/" + schoolID + "/absent_no_reason");
+
+inSchoolRef.on("value", (snapshot) => {
+    var inSchoolCount = snapshot.val() || 0;
+    document.getElementById("in_school").innerText = inSchoolCount;
+});
+
+lessonsLiveRef.on("value", (snapshot) => {
+    var liveLessonsCount = snapshot.val() || 0;
+    document.getElementById("lessons_live").innerText = liveLessonsCount;
+});
+
+absentNoReason.on("value", (snapshot) => {
+    var absentNoReasonCount = snapshot.val() || 0;
+    document.getElementById("absent_no_reason").innerText = absentNoReasonCount;
+});

@@ -11,7 +11,23 @@ storage = firebase.storage()
 
 @is_authenticated
 def home(request):
-    context = {}
+    # get schoolid
+    schoolid = request.session.get('schoolid')
+
+    schoolName = db.child("schools").child(schoolid).child("school_name").get().val()
+    total_registered = db.child("schools").child(schoolid).child("students_registered").get().val()
+
+    # TODO all values in context
+
+    context = {
+        "SCHOOL_NAME": schoolName,
+        "SCHOOL_ID": schoolid,
+        "TOTAL_REGISTERED": total_registered,
+        "WEEK_STATISTIC": [0, 0, 0, 0, 0, 0, 0],
+        "LAST_REPORT": "02/24",
+        "EVENTS": [],
+    }
+
     return render(request, 'adminpanel/home.html', context=context)
 
 def login(request):
@@ -22,7 +38,6 @@ def login(request):
         print(schoolid, password)
 
         if (db.child("schools").child(schoolid).get()):
-            print(db.child("schools").child(schoolid).child("password").get().val())
             if(db.child("schools").child(schoolid).child("password").get().val() == password):
                 print("Succes")
 
