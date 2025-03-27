@@ -24,6 +24,9 @@ venv/
 # Config
 cfg.py
 
+#migrations
+migrations/
+
 # Logs
 logs/
 *.log
