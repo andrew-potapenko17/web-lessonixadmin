@@ -1,2 +1,29 @@
-cfg.py
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Django database
+db.sqlite3
+
+# Environment files
+.env
+*.env
+
+# Firebase config
 firebase-config.js
+
+# Compiled Python files
+*.pyd
+*.pyo
+
+# Virtual environment
+venv/
+.env/
+
+# Config
+cfg.py
+
+# Logs
+logs/
+*.log
