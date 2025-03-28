@@ -32,8 +32,32 @@ def home(request):
 
 @is_authenticated
 def classesPage(request):
-    # render classes page
-    return render(request, 'adminpanel/classes.html')
+    schoolid = request.session.get('schoolid')
+    
+    classes_data = db.child("school_classes").child(schoolid).get().val()
+    
+    classes_list = []
+    
+    if classes_data:
+        for class_name, class_value in classes_data.items():
+            lead_teacher = class_value.get("leadTeacher", "Невідомо")
+            
+            students = class_value.get("students", {})
+            students_count = len(students)
+
+            print(students)
+            
+            classes_list.append({
+                "name": class_name,
+                "leadTeacher": lead_teacher,
+                "studentsCount": students_count
+            })
+    
+    context = {
+        "classes": classes_list
+    }
+    
+    return render(request, 'adminpanel/classes.html', context)
 
 def login(request):
     if request.method == 'POST':

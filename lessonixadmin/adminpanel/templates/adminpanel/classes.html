@@ -38,17 +38,22 @@
         </div>
     </div>
     <div class="lower">
-        <div class="class-card">
-            <div class="header">
-                <span class="class-name">10-A</span>
-                <img src="{% static 'img/class-ico.png' %}" alt="Class Icon" class="class-icon">
+        {% for cls in classes %}
+            <div class="class-card">
+                <div class="header">
+                    <span class="class-name">{{ cls.name }}</span>
+                    <img src="{% static 'img/class-ico.png' %}" alt="Class Icon" class="class-icon">
+                </div>
+                
+                <div class="details">{{ cls.studentsCount }} учнів</div>
+                
+                <div class="arrow">
+                    <img src="{% static 'img/arrow-right.png' %}" alt="Arrow Icon">
+                </div>
+                
+                <div class="teacher">Класний керівник: {{ cls.leadTeacher }}</div>
             </div>
-            <div class="details">26 учнів</div>
-            <div class="arrow">
-                <img src="{% static 'img/arrow-right.png' %}" alt="Arrow Icon">
-            </div>
-            <div class="teacher">Класний керівник: Чигоріна А. А.</div>
-        </div>        
+        {% endfor %} 
     </div>
 </div>
 
