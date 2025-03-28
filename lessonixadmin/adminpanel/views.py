@@ -30,6 +30,11 @@ def home(request):
 
     return render(request, 'adminpanel/home.html', context=context)
 
+@is_authenticated
+def classesPage(request):
+    # render classes page
+    return render(request, 'adminpanel/classes.html')
+
 def login(request):
     if request.method == 'POST':
         schoolid = request.POST.get('schoolid')

@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="mainContent">
+    <div class="upper">
+        <div class="left">
+            <div class="title">
+                <span class="titlespan">Класи школи</span>
+            </div>
+            <div class="filters">
+                <div class="select-wrapper">
+                    <select name="class">
+                        <option value="" hidden>Клас</option>
+                        <option value="11">11</option>
+                        <option value="10">10</option>
+                        <option value="9">9</option>
+                    </select>
+                </div>
+
+                <div class="select-wrapper">
+                    <select name="letter">
+                        <option value="" hidden>Буква</option>
+                        <option value="11">А</option>
+                        <option value="10">Б</option>
+                        <option value="9">В</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <a href="/">
+                <div class="addclass">
+                    <span>Додати</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="lower">
+        <div class="class-card">
+            <div class="header">
+                <span class="class-name">10-A</span>
+                <img src="{% static 'img/class-ico.png' %}" alt="Class Icon" class="class-icon">
+            </div>
+            <div class="details">26 учнів</div>
+            <div class="teacher">Класний керівник: Чигоріна А. А.</div>
+            <div class="arrow">
+                <img src="{% static 'img/arrow-right.png' %}" alt="Arrow Icon">
+            </div>
+        </div>        
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/classes.css' %}" />
+
+{% endblock content %}
