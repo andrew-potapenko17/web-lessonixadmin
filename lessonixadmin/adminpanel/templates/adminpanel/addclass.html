@@ -1,0 +1,73 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="mainContent">
+    <form method="POST" action="{% url 'addclass' %}">
+        <div class="upper">
+            <div class="header">
+                <span>Додати клас</span>
+                <img src="{% static "img/class-ico.png"%}" alt="students icon"/>
+            </div>
+            <div class="inputs">
+                <div class="class-input">
+                    <span>Клас:</span>
+                    <input type="text" id="class" name="class">
+                </div>
+                <div class="letter-input">
+                    <span>Буква:</span>
+                    <input type="text" id="letter" name="letter">
+                </div>
+                <div class="leadteacher-input">
+                    <span>Класний керівник:</span>
+                    <input type="text" id="leadteacher" name="leadteacher">
+                </div>
+            </div>
+        </div>
+        <div class="lower">
+            <div class="students-header">
+                <div class="students-label">
+                    <img src="{% static "img/class-ico.png"%}" alt="student icon"/>
+                    <span>Учні</span>
+                </div>
+                <div class="action-buttons">
+                    <a href="/">
+                        <img src="{% static "img/class-ico.png" %}" alt="import from xlxs"/>
+                    </a>
+                    <a href="/">
+                        <img src="{% static "img/class-ico.png" %}" alt="add student"/>
+                    </a>
+                </div>
+            </div>
+            <div class="students-list">
+                <div class="singlestudent">
+                    <div class="student-name">
+                        <span class="counter">1.</span>
+                        <span class="name">Volodymyr Zelenski</span>
+                    </div>
+                    <div class="student-buttons">
+                        <a href="/">
+                            <img src="{% static "img/class-ico.png" %}" alt="edit student"/>
+                        </a>
+                        <a href="/">
+                            <img src="{% static "img/class-ico.png" %}" alt="delete student"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="create-button">
+                <a href="/">
+                    <div class="button">
+                        <span>Додати</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/classes.css' %}" />
+
+{% endblock content%}

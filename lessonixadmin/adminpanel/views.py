@@ -59,6 +59,10 @@ def classesPage(request):
     
     return render(request, 'adminpanel/classes.html', context)
 
+@is_authenticated
+def addClassPage(request):
+    return render(request, 'adminpanel/addclass.html')
+
 def login(request):
     if request.method == 'POST':
         schoolid = request.POST.get('schoolid')
