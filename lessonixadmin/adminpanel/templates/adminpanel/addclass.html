@@ -8,20 +8,22 @@
     <form method="POST" action="{% url 'addclass' %}">
         <div class="upper">
             <div class="header">
-                <span>Додати клас</span>
-                <img src="{% static "img/class-ico.png"%}" alt="students icon"/>
+                <span class="title">Додати клас</span>
+                <div class="students-ico">
+                    <img src="{% static "img/class-ico.png"%}" alt="students icon"/>
+                </div>
             </div>
             <div class="inputs">
                 <div class="class-input">
-                    <span>Клас:</span>
+                    <p>Клас:</p>
                     <input type="text" id="class" name="class">
                 </div>
                 <div class="letter-input">
-                    <span>Буква:</span>
+                    <p>Буква:</p>
                     <input type="text" id="letter" name="letter">
                 </div>
                 <div class="leadteacher-input">
-                    <span>Класний керівник:</span>
+                    <p>Класний керівник:</p>
                     <input type="text" id="leadteacher" name="leadteacher">
                 </div>
             </div>
@@ -29,15 +31,15 @@
         <div class="lower">
             <div class="students-header">
                 <div class="students-label">
-                    <img src="{% static "img/class-ico.png"%}" alt="student icon"/>
-                    <span>Учні</span>
+                    <img src="{% static "img/student-ico.png"%}" alt="student icon"/>
+                    <span>Учні:</span>
                 </div>
                 <div class="action-buttons">
                     <a href="/">
-                        <img src="{% static "img/class-ico.png" %}" alt="import from xlxs"/>
+                        <img src="{% static "img/import-ico.png" %}" alt="import from xlxs" class="action-button"/>
                     </a>
                     <a href="/">
-                        <img src="{% static "img/class-ico.png" %}" alt="add student"/>
+                        <img src="{% static "img/plus-ico.png" %}" alt="add student" class="action-button"/>
                     </a>
                 </div>
             </div>
@@ -49,10 +51,10 @@
                     </div>
                     <div class="student-buttons">
                         <a href="/">
-                            <img src="{% static "img/class-ico.png" %}" alt="edit student"/>
+                            <img src="{% static "img/edit-ico.png" %}" alt="edit student"/>
                         </a>
                         <a href="/">
-                            <img src="{% static "img/class-ico.png" %}" alt="delete student"/>
+                            <img src="{% static "img/delete-ico.png" %}" alt="delete student"/>
                         </a>
                     </div>
                 </div>
@@ -68,6 +70,97 @@
     </form>
 </div>
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/classes.css' %}" />
+<div class="addstudent-form">
+    <form>
+        <div class="addstudent-body">
+            <div class="title">
+                <span>Додати учня</span>
+            </div>
+            <div class="input-data">
+                <div class="student-image">
+                    <img src="{% static "img/student-ico.png"%}" alt="student icon"/>
+                </div>
+                <div class="fullname-input">
+                    <p>Повне Ім`я:</p>
+                    <input type="text" id="fullname" name="fullname">
+                </div>
+            </div>
+            <div class="submit-box">
+                <a href="/">
+                    <div class="submit-form">
+                        <span>Додати</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="editstudent-form">
+    <form>
+        <div class="editstudent-body">
+            <div class="title">
+                <span>Редагувати учня</span>
+            </div>
+            <div class="input-data">
+                <div class="student-image">
+                    <img src="{% static "img/student-ico.png"%}" alt="student icon"/>
+                </div>
+                <div class="fullname-input">
+                    <p>Повне Ім`я:</p>
+                    <input type="text" id="fullname" name="fullname">
+                </div>
+            </div>
+            <div class="submit-box">
+                <a href="/">
+                    <div class="submit-form">
+                        <span>Редагувати</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="deletestudent-form">
+        <div class="deletestudent-body">
+            <span>Ви впевнен що хочете видалити учня?</span>
+            <div class="cancel-button">
+                <span>Скасувати</span>
+            </div>
+            <div class="submit-delete-button">
+                <span>Так</span>
+            </div>
+        </div>
+</div>
+
+<div class="choosexlxs-form">
+        <div class="choosexlxs-body">
+            <span>Оберіть файл .xlxs з учнями</span>
+            <div class="choose-file">
+                <span>Обрати</span>
+            </div>
+        </div>
+</div>
+
+<div class="xlxssucces-form">
+        <div class="xlxssucces-body">
+            <span>[COUNT] учнів було успішно завантажено</span>
+            <div class="ok-button">
+                <span>Добре</span>
+            </div>
+        </div>
+</div>
+
+<div class="xlxserror-form">
+    <div class="xlxssucces-body">
+        <span>Помилка завантаження учнів</span>
+        <div class="ok-button">
+            <span>Добре</span>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/addclass.css' %}" />
 
 {% endblock content%}
