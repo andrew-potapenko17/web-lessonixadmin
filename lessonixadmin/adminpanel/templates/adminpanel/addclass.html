@@ -5,7 +5,6 @@
 {% block content %}
 
 <div class="mainContent">
-    <form method="POST" action="{% url 'addclass' %}">
         <div class="upper">
             <div class="header">
                 <span class="title">Додати клас</span>
@@ -35,12 +34,12 @@
                     <span>Учні:</span>
                 </div>
                 <div class="action-buttons">
-                    <a href="/">
+                    <button id="openinportform">
                         <img src="{% static "img/import-ico.png" %}" alt="import from xlxs" class="action-button"/>
-                    </a>
-                    <a href="/">
+                    </button>
+                    <button id="openaddstudent">
                         <img src="{% static "img/plus-ico.png" %}" alt="add student" class="action-button"/>
-                    </a>
+                    </buttton>
                 </div>
             </div>
             <div class="students-list">
@@ -50,12 +49,12 @@
                         <span class="name">Volodymyr Zelenski</span>
                     </div>
                     <div class="student-buttons">
-                        <a href="/">
+                        <button id="openeditstudent">
                             <img src="{% static "img/edit-ico.png" %}" alt="edit student"/>
-                        </a>
-                        <a href="/">
+                        </button>
+                        <button id="opendeletestudent">
                             <img src="{% static "img/delete-ico.png" %}" alt="delete student"/>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -67,11 +66,11 @@
                 </a>
             </div>
         </div>
-    </form>
 </div>
 
 <div class="addstudent-form">
     <form>
+        {% csrf_token %} 
         <div class="addstudent-body">
             <div class="title">
                 <span>Додати учня</span>
@@ -98,6 +97,7 @@
 
 <div class="editstudent-form">
     <form>
+        {% csrf_token %} 
         <div class="editstudent-body">
             <div class="title">
                 <span>Редагувати учня</span>
@@ -188,5 +188,25 @@
 </div>
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/addclass.css' %}" />
+
+<script>
+    document.getElementById("openaddstudent").addEventListener("click", function () {
+        openModal(".addstudent-form");
+      });
+    document.getElementById("openinportform").addEventListener("click", function () {
+        openModal(".choosexlxs-form");
+      });
+    document.getElementById("openeditstudent").addEventListener("click", function () {
+        openModal(".editstudent-form");
+      });
+      document.getElementById("opendeletestudent").addEventListener("click", function () {
+        openModal(".deletestudent-form");
+      });
+    document.querySelector(".cancel-button").addEventListener("click", function () {
+        closeModal(".deletestudent-form");
+      });
+</script>
+
+<script src="{% static 'js/addclass.js' %}"></script>
 
 {% endblock content%}
