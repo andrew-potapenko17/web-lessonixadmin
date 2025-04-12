@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import cfg
+from . import generator
 from .decorators import is_authenticated
 import pyrebase
 
@@ -61,6 +62,52 @@ def classesPage(request):
 
 @is_authenticated
 def addClassPage(request):
+    if request.method == 'POST':
+        class_digit = request.POST.get('class')
+        class_letter = request.POST.get('letter')
+        leadteacher = request.POST.get('leadteacher')
+
+        schoolid = request.session.get('schoolid')
+        students_list = request.session.get('students', [])
+
+        try:
+            class_name = f"{str(class_digit)}-{str(class_letter)}"
+
+            student_ids = []
+            for full_name in students_list:
+                student_id = generator.unic(k=10)
+                student_ids.append(student_id)
+                
+                registration_code = generator.unic(k=16)
+
+                db.child("registercodes").child(registration_code).set({
+                    "student_id": student_id,
+                    "class": class_name,
+                    "schoolID": schoolid
+                })
+
+                db.child("students").child(schoolid).child(student_id).set({
+                    "full_name": full_name,
+                    "registered": False,
+                    "registercode": registration_code,
+                    "schoolStatus": "nolesson",
+                    "studentStatus": "outschool",
+                    "class": class_name,
+                })
+
+            db.child("school_classes").child(schoolid).child(class_name).set({
+                "class": class_digit,
+                "letter": class_letter,
+                "leadTeacher": leadteacher,
+                "students": student_ids 
+            })
+            
+            request.session['students'] = []
+            
+            return redirect('classes')
+        except Exception as e:
+            return redirect('addclass')
+
     return render(request, 'adminpanel/addclass.html')
 
 def login(request):

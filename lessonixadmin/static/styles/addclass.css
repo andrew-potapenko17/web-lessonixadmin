@@ -341,4 +341,5 @@ button {
     cursor: pointer;
     box-shadow: none;
     outline: none;
+    color: white;
 }
