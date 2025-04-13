@@ -45,8 +45,6 @@ def classesPage(request):
             
             students = class_value.get("students", {})
             students_count = len(students)
-
-            print(students)
             
             classes_list.append({
                 "name": class_name,
@@ -68,23 +66,30 @@ def addClassPage(request):
         leadteacher = request.POST.get('leadteacher')
 
         schoolid = request.session.get('schoolid')
-        students_list = request.session.get('students', [])
-
+        students_list = request.POST.getlist('students')
+        print(students_list)
+        #students_list = request.session.get('students', [])
+        
         try:
+            print(" Test #1")
             class_name = f"{str(class_digit)}-{str(class_letter)}"
 
             student_ids = []
             for full_name in students_list:
-                student_id = generator.unic(k=10)
+                student_id = generator.unic(length=10)
                 student_ids.append(student_id)
-                
-                registration_code = generator.unic(k=16)
+
+                registration_code = generator.unic(length=16)
+
+                print(" Test #2")
 
                 db.child("registercodes").child(registration_code).set({
                     "student_id": student_id,
                     "class": class_name,
                     "schoolID": schoolid
                 })
+
+                print(" Test #3")
 
                 db.child("students").child(schoolid).child(student_id).set({
                     "full_name": full_name,
@@ -94,6 +99,8 @@ def addClassPage(request):
                     "studentStatus": "outschool",
                     "class": class_name,
                 })
+
+            print(" Test #4")
 
             db.child("school_classes").child(schoolid).child(class_name).set({
                 "class": class_digit,
@@ -106,6 +113,7 @@ def addClassPage(request):
             
             return redirect('classes')
         except Exception as e:
+            print(e)
             return redirect('addclass')
 
     return render(request, 'adminpanel/addclass.html')
