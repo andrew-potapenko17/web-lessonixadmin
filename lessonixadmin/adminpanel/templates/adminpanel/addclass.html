@@ -7,22 +7,22 @@
   <div class="mainContent">
     <div class="upper">
       <div class="header">
-        <span class="main-title">Додати клас</span>
+        <span class="main-title">Add Class</span>
         <div class="students-ico">
           <img src="{% static "img/class-ico.png" %}" alt="students icon"/>
         </div>
       </div>
       <div class="inputs">
         <div class="class-input">
-          <p>Клас:</p>
+          <p>Class:</p>
           <input type="text" id="class" name="class" required>
         </div>
         <div class="letter-input">
-          <p>Буква:</p>
+          <p>Letter:</p>
           <input type="text" id="letter" name="letter" required>
         </div>
         <div class="leadteacher-input">
-          <p>Класний керівник:</p>
+          <p>Class teacher:</p>
           <input type="text" id="leadteacher" name="leadteacher" required>
         </div>
       </div>
@@ -31,11 +31,11 @@
       <div class="students-header">
         <div class="students-label">
           <img src="{% static "img/student-ico.png" %}" alt="student icon"/>
-          <span>Учні:</span>
+          <span>Students:</span>
         </div>
         <div class="action-buttons">
           <button type="button" id="openinportform">
-            <img src="{% static "img/import-ico.png" %}" alt="import from xlxs" class="action-button"/>
+            <img src="{% static "img/import-ico.png" %}" alt="import from xlsx" class="action-button"/>
           </button>
           <button type="button" id="openaddstudent">
             <img src="{% static "img/plus-ico.png" %}" alt="add student" class="action-button"/>
@@ -48,7 +48,7 @@
       </div>
       <div class="create-button">
         <button type="submit" class="button">
-          <span>Додати</span>
+          <span>Add</span>
         </button>
       </div>
     </div>
@@ -61,20 +61,20 @@
     {% csrf_token %}
     <div class="addstudent-body">
       <div class="title">
-        <span>Додати учня</span>
+        <span>Add Student</span>
       </div>
       <div class="input-data">
         <div class="student-image">
           <img src="{% static "img/student-ico.png" %}" alt="student icon"/>
         </div>
         <div class="fullname-input">
-          <p>Повне Імя:</p>
+          <p>Full Name:</p>
           <input type="text" id="add-fullname" name="fullname">
         </div>
       </div>
       <div class="submit-box">
         <button type="button" class="submit-form">
-          <span>Додати</span>
+          <span>Add</span>
         </button>
       </div>
     </div>
@@ -87,20 +87,20 @@
     {% csrf_token %}
     <div class="editstudent-body">
       <div class="title">
-        <span>Редагувати учня</span>
+        <span>Edit Student</span>
       </div>
       <div class="input-data">
         <div class="student-image">
           <img src="{% static "img/student-ico.png" %}" alt="student icon"/>
         </div>
         <div class="fullname-input">
-          <p>Повне Імя:</p>
+          <p>Full Name:</p>
           <input type="text" id="edit-fullname" name="fullname">
         </div>
       </div>
       <div class="submit-box">
         <button type="button" class="submit-form">
-          <span>Редагувати</span>
+          <span>Edit</span>
         </button>
       </div>
     </div>
@@ -111,14 +111,14 @@
 <div class="deletestudent-form modal">
   <div class="deletestudent-body">
     <div class="title-info">
-      <span>Ви впевнені що хочете видалити учня?</span>
+      <span>Are you sure you want to delete this student?</span>
     </div> 
     <div class="buttons-container">
       <button type="button" class="cancel-button">
-        <span>Скасувати</span>
+        <span>Cancel</span>
       </button>
       <button type="button" class="delete-button">
-        <span>Так</span>
+        <span>Yes</span>
       </button>
     </div>
   </div>
@@ -128,11 +128,11 @@
 <div class="choosexlxs-form modal">
   <div class="choosexlxs-body">
     <div class="title-info">
-      <span>Оберіть файл .xlxs з учнями</span>
+      <span>Select a .xlsx file with students</span>
     </div>
     <div class="buttons-container">
       <button type="button" class="upload-button">
-        <span>Обрати</span>
+        <span>Choose</span>
       </button>
     </div>
   </div>
@@ -142,11 +142,11 @@
 <div class="xlxssucces-form modal">
   <div class="xlxssucces-body">
     <div class="title-info">
-      <span>[COUNT] учнів було успішно завантажено</span>
+      <span>[COUNT] students were successfully uploaded</span>
     </div>
     <div class="buttons-container">
       <button type="button" class="ok-button">
-        <span>Добре</span>
+        <span>OK</span>
       </button>
     </div>
   </div>
@@ -156,11 +156,11 @@
 <div class="xlxserror-form modal">
   <div class="xlxserror-body">
     <div class="title-info">
-      <span>Помилка завантаження учнів</span>
+      <span>Error uploading students</span>
     </div>
     <div class="buttons-container">
       <button type="button" class="ok-button">
-        <span>Добре</span>
+        <span>OK</span>
       </button>
     </div>
   </div>
@@ -181,11 +181,9 @@ function updateStudentList() {
   listContainer.innerHTML = '';  // Clear existing list
 
   students.forEach((student, index) => {
-    // Create student container
     const studentDiv = document.createElement('div');
     studentDiv.classList.add('singlestudent');
 
-    // Name and counter
     const nameDiv = document.createElement('div');
     nameDiv.classList.add('student-name');
     const counterSpan = document.createElement('span');
@@ -197,24 +195,23 @@ function updateStudentList() {
     nameDiv.appendChild(counterSpan);
     nameDiv.appendChild(nameSpan);
 
-    // Action buttons: edit and delete
     const buttonsDiv = document.createElement('div');
     buttonsDiv.classList.add('student-buttons');
-    // Edit button
+
     const editButton = document.createElement('button');
     editButton.addEventListener('click', () => openEditStudent(index));
     const editImg = document.createElement('img');
     editImg.src = "{% static 'img/edit-ico.png' %}";
     editImg.alt = "edit student";
     editButton.appendChild(editImg);
-    // Delete button
+
     const deleteButton = document.createElement('button');
     deleteButton.addEventListener('click', () => openDeleteStudent(index));
     const deleteImg = document.createElement('img');
     deleteImg.src = "{% static 'img/delete-ico.png' %}";
     deleteImg.alt = "delete student";
     deleteButton.appendChild(deleteImg);
-    // Append buttons
+
     buttonsDiv.appendChild(editButton);
     buttonsDiv.appendChild(deleteButton);
 
@@ -224,7 +221,6 @@ function updateStudentList() {
   });
 }
 
-// Function to add a student (triggered from add student modal)
 function addStudent() {
   const fullnameInput = document.getElementById('add-fullname');
   const fullname = fullnameInput.value.trim();
@@ -234,11 +230,10 @@ function addStudent() {
     fullnameInput.value = '';
     closeModal('.addstudent-form');
   } else {
-    alert("Будь ласка, введіть повне ім'я.");
+    alert("Please enter a full name.");
   }
 }
 
-// Open edit modal and prefill data
 function openEditStudent(index) {
   const student = students[index];
   document.getElementById('edit-fullname').value = student.fullname;
@@ -246,7 +241,6 @@ function openEditStudent(index) {
   openModal('.editstudent-form');
 }
 
-// Save edited student
 function editStudent() {
   const editInput = document.getElementById('edit-fullname');
   const newName = editInput.value.trim();
@@ -256,17 +250,15 @@ function editStudent() {
     updateStudentList();
     closeModal('.editstudent-form');
   } else {
-    alert("Будь ласка, введіть повне ім'я.");
+    alert("Please enter a full name.");
   }
 }
 
-// Open delete modal, storing current index in modal attribute
 function openDeleteStudent(index) {
   document.querySelector('.deletestudent-form').setAttribute('data-delete-index', index);
   openModal('.deletestudent-form');
 }
 
-// Delete student after confirmation
 function deleteStudent() {
   const index = document.querySelector('.deletestudent-form').getAttribute('data-delete-index');
   if (index !== null) {
@@ -276,21 +268,15 @@ function deleteStudent() {
   }
 }
 
-// Empty function for XLS import – to be implemented later
 function importXls() {
   console.log("Import XLS function triggered.");
-  // You can later trigger a file input click here
-  // For now, just open the XLS import modal if needed:
   openModal('.choosexlxs-form');
 }
 
-// Before form submission, inject hidden inputs for each student
 function handleFormSubmit(event) {
   const form = document.getElementById('addClassForm');
-  // Remove any existing hidden inputs for students
   const oldInputs = form.querySelectorAll('input[name="students"]');
   oldInputs.forEach(input => input.remove());
-  // Append current students as hidden inputs
   students.forEach(student => {
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'hidden';
@@ -300,26 +286,17 @@ function handleFormSubmit(event) {
   });
 }
 
-// Attach event listeners after DOM loads
 document.addEventListener('DOMContentLoaded', function () {
-  // Main form submission: hook to prepare student data
   document.getElementById('addClassForm').addEventListener('submit', handleFormSubmit);
-
-  // Open student modals (if not already handled in your external JS)
   document.getElementById("openaddstudent").addEventListener("click", function () {
     openModal(".addstudent-form");
   });
   document.getElementById("openinportform").addEventListener("click", function () {
     importXls();
   });
-
-  // Add student from add modal
   document.querySelector('.addstudent-form .submit-form').addEventListener("click", addStudent);
-  // Save edited student from edit modal
   document.querySelector('.editstudent-form .submit-form').addEventListener("click", editStudent);
-  // Confirm deletion from delete modal
   document.querySelector('.deletestudent-form .delete-button').addEventListener("click", deleteStudent);
-  // Cancel deletion – close delete modal
   document.querySelector('.deletestudent-form .cancel-button').addEventListener("click", function () {
     closeModal(".deletestudent-form");
   });

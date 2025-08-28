@@ -7,12 +7,12 @@
     <div class="upper">
         <div class="left">
             <div class="title">
-                <span class="titlespan">Класи школи</span>
+                <span class="titlespan">School Classes</span>
             </div>
             <div class="filters">
                 <div class="select-wrapper">
                     <select name="class">
-                        <option value="" hidden>Клас</option>
+                        <option value="" hidden>Class</option>
                         <option value="11">11</option>
                         <option value="10">10</option>
                         <option value="9">9</option>
@@ -21,10 +21,10 @@
 
                 <div class="select-wrapper">
                     <select name="letter">
-                        <option value="" hidden>Буква</option>
-                        <option value="11">А</option>
-                        <option value="10">Б</option>
-                        <option value="9">В</option>
+                        <option value="" hidden>Letter</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
                     </select>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="right">
             <a href="{% url 'addclass' %}">
                 <div class="addclass">
-                    <span>Додати</span>
+                    <span>Add</span>
                 </div>
             </a>
         </div>
@@ -45,13 +45,13 @@
                     <img src="{% static 'img/class-ico.png' %}" alt="Class Icon" class="class-icon">
                 </div>
                 
-                <div class="details">{{ cls.studentsCount }} учнів</div>
+                <div class="details">{{ cls.studentsCount }} students</div>
                 
                 <div class="arrow">
                     <img src="{% static 'img/arrow-right.png' %}" alt="Arrow Icon">
                 </div>
                 
-                <div class="teacher">Класний керівник: {{ cls.leadTeacher }}</div>
+                <div class="teacher">Class teacher: {{ cls.leadTeacher }}</div>
             </div>
         {% endfor %} 
     </div>
