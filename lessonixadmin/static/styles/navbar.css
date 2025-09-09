@@ -50,7 +50,7 @@ a {
     height: auto;
 }
 
-.classes-link, .personal-link, .statistics-link, .schedule-link, .reports-link {
+.classes-link, .staff-link, .statistics-link, .schedule-link, .reports-link {
     width: 171px;
     height: 51px;
     border: 2px solid #ffffff;
@@ -70,7 +70,7 @@ a {
     width: 45px;
 }
 
-.personal-link img {
+.staff-link img {
     margin-left: 4%;
     width: 40px;
 }

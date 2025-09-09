@@ -118,6 +118,11 @@ def addClassPage(request):
 
     return render(request, 'adminpanel/addclass.html')
 
+@is_authenticated
+def staffPage(request):
+    schoolid = request.session.get('schoolid')
+    return render(request, 'adminpanel/staff.html')
+
 def login(request):
     if request.method == 'POST':
         schoolid = request.POST.get('schoolid')

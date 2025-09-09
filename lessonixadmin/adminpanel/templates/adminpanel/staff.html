@@ -1,0 +1,70 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mainContent">
+    <div class="upper">
+        <div class="left">
+            <div class="title">
+                <span class="titlespan">School Staff</span>
+            </div>
+
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search staff">
+            </div>
+        </div>
+        <div class="right">
+            <a href="{% url 'addstaff' %}">
+                <div class="addstaff">
+                    <span>Add</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+
+    <div class="lower">
+        {% for staff in staff_list %}
+            <div class="staff-card {% if staff.inactive %}inactive{% endif %}">
+                <div class="avatar">
+                    <img src="{% static 'img/user.png' %}" alt="Avatar">
+                </div>
+
+                <div class="info">
+                    <div class="name">{{ staff.last_name }} {{ staff.first_name }}</div>
+                    <div class="role">{{ staff.role }}</div>
+                    <div class="class">
+                        Class: {{ staff.class_name|default:"None" }}
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="staff-card {% if staff.inactive %}inactive{% endif %}">
+            <div class="avatar">
+                <img src="{% static 'img/user.png' %}" alt="Avatar">
+            </div>
+
+            <div class="info">
+                <div class="name">Test Teacher</div>
+                <div class="role">Teacher</div>
+                <div class="class">
+                    Class: {{ staff.class_name|default:"None" }}
+                </div>
+            </div>
+
+            <div class="arrow">
+                <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/staff.css' %}" />
+
+{% endblock content %}
