@@ -32,11 +32,21 @@
                 </div>
 
                 <div class="info">
-                    <div class="name">{{ staff.last_name }} {{ staff.first_name }}</div>
-                    <div class="role">{{ staff.role }}</div>
-                    <div class="class">
-                        Class: {{ staff.class_name|default:"None" }}
+                    <div class="name">{{ staff.full_name }}</div>
+                    <div class="role">
+                        {% if staff.role == "teacher" %}
+                            Teacher
+                        {% elif staff.role == "med" %}
+                            Medical worker
+                        {% else %}
+                            Other staff
+                        {% endif %}
                     </div>
+                    {% if staff.role == "teacher" %}
+                    <div class="class">
+                        Class: {{ staff.primaryclass|default:"N/A" }}
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="arrow">
@@ -44,24 +54,6 @@
                 </div>
             </div>
         {% endfor %}
-
-        <div class="staff-card {% if staff.inactive %}inactive{% endif %}">
-            <div class="avatar">
-                <img src="{% static 'img/avatar.png' %}" alt="Avatar">
-            </div>
-
-            <div class="info">
-                <div class="name">Test Teacher</div>
-                <div class="role">Teacher</div>
-                <div class="class">
-                    Class: {{ staff.class_name|default:"None" }}
-                </div>
-            </div>
-
-            <div class="arrow">
-                <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
-            </div>
-        </div>
     </div>
 </div>
 

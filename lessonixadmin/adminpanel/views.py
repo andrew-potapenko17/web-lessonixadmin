@@ -121,7 +121,25 @@ def addClassPage(request):
 @is_authenticated
 def staffPage(request):
     schoolid = request.session.get('schoolid')
-    return render(request, 'adminpanel/staff.html')
+    try:
+        users = db.child("users").get().val()
+        if users:
+            staff_list = [
+                {
+                    'full_name': user_info['full_name'],
+                    'user_id': user_id,
+                    'primaryclass': user_info.get('primaryclass', 'N/A'),
+                    'role': user_info.get('role'),
+                }
+                for user_id, user_info in users.items()
+                if user_info.get('school_id') == schoolid and user_info.get('role') != 'student'
+            ]
+        else:
+            staff_list = []
+    except Exception as e:
+        staff_list = []
+        print(f"Failed to retrieve users. Error: {str(e)}")
+    return render(request, 'adminpanel/staff.html', context={'staff_list': staff_list})
 
 def login(request):
     if request.method == 'POST':
