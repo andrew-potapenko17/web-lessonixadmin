@@ -98,14 +98,14 @@
     width: 270px;
     height: 140px;
     border: 2px solid #000;
-    border-radius: 12px;
-    padding: 15px;
+    border-radius: 18px;
+    padding: 12px 18px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     font-family: Arial, sans-serif;
     background: #fff;
-    transition: 0.3s;
+    position: relative;
 }
 
 .staff-card.inactive {
@@ -113,38 +113,47 @@
 }
 
 .avatar img {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 6px;
 }
 
 .info {
     flex-grow: 1;
-    margin: 0 12px;
+    margin-left: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .info .name {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .info .role {
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 3px;
-    color: #333;
 }
 
 .info .class {
+    position: absolute;
+    bottom: 10px;
+    left: 18px;
     font-size: 13px;
-    margin-top: 6px;
-    color: #555;
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .arrow img {
-    width: 32px;
+    width: 40px;
     height: auto;
 }
-
-
