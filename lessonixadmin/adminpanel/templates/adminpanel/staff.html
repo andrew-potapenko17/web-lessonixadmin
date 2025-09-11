@@ -14,11 +14,9 @@
             </div>
         </div>
         <div class="right">
-            <a href="{% url 'addstaff' %}">
-                <div class="addstaff">
-                    <span>Add</span>
-                </div>
-            </a>
+            <div class="addstaff" id="addstaff">
+                <span>Add</span>
+            </div>
         </div>
     </div>
 
@@ -57,6 +55,28 @@
     </div>
 </div>
 
+<div class="choose-type modal">
+    <div class="choose-type-body">
+  
+      <div class="choose-card">
+        <div class="choose-icon">
+            <img src="{% static 'img/book.png' %}" alt="Avatar">
+        </div>
+        <div class="choose-label">Teacher</div>
+      </div>
+  
+      <div class="choose-card">
+        <div class="choose-icon">
+            <img src="{% static 'img/medkit.png' %}" alt="Avatar">
+        </div>
+        <div class="choose-label">Medical worker</div>
+      </div>
+  
+    </div>
+  </div>
+
 <link rel="stylesheet" type="text/css" href="{% static 'styles/staff.css' %}" />
+
+<script src="{% static 'js/staffPage.js' %}"></script>
 
 {% endblock content %}
