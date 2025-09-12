@@ -141,6 +141,14 @@ def staffPage(request):
         print(f"Failed to retrieve users. Error: {str(e)}")
     return render(request, 'adminpanel/staff.html', context={'staff_list': staff_list})
 
+
+@is_authenticated
+def addStaffPage(request, type):
+    if type == "teacher":
+        return render(request, 'adminpanel/addteacher.html')
+    elif type == "med":
+        return render(request, 'adminpanel/addmed.html')
+
 def login(request):
     if request.method == 'POST':
         schoolid = request.POST.get('schoolid')

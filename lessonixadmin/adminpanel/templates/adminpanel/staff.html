@@ -57,20 +57,24 @@
 
 <div class="choose-type modal">
     <div class="choose-type-body">
-  
+        
+    <a href="{% url 'addstaff' 'teacher' %}">
       <div class="choose-card">
         <div class="choose-icon">
             <img src="{% static 'img/book.png' %}" alt="Avatar">
         </div>
         <div class="choose-label">Teacher</div>
       </div>
-  
+    </a>
+    
+    <a href="{% url 'addstaff' 'med' %}">
       <div class="choose-card">
         <div class="choose-icon">
             <img src="{% static 'img/medkit.png' %}" alt="Avatar">
         </div>
         <div class="choose-label">Medical worker</div>
       </div>
+    <a/>
   
     </div>
   </div>
