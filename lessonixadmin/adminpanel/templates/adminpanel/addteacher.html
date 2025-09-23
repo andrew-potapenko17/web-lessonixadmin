@@ -3,21 +3,48 @@
 
 {% block content %}
 <div class="mainContent">
-    <div class="upper">
+    <div class="addteacher">
         <div class="title">
-            <span class="titlespan">Add teacher</span>
+            <h1>Add Teacher <img src="{% static 'img/book.png' %}" alt="Book"></h1>
         </div>
-    </div>
 
-    
+        <div class="teacher-form">
+            <div class="avatar">
+                <img src="{% static 'img/avatar.png' %}" alt="Avatar">
+            </div>
 
-    <div class="lower">
-        
+            <div class="inputs">
+                <div class="leftinputs">
+                    <label>Full Name:</label>
+                    <input type="text" id="teacherName" placeholder="First Last">
+
+                    <label>Class:</label>
+                    <input type="text" id="teacherClass" placeholder="e.g. 7-A">
+                </div>
+                <div class="rightinputs">
+                    <label>Subjects:</label>
+                    <div class="multi-input">
+                        <input type="text" id="subjectInput" placeholder="Enter subject">
+                        <button type="button" onclick="addSubject()">+</button>
+                    </div>
+                    <div id="subjectList" class="tag-list"></div>
+
+                    <label>Rooms:</label>
+                    <div class="multi-input">
+                        <input type="text" id="roomInput" placeholder="Enter room number">
+                        <button type="button" onclick="addRoom()">+</button>
+                    </div>
+                    <div id="roomList" class="tag-list"></div>
+                </div>                
+            </div>
+        </div>
+
+        <div class="submit">
+            <button type="button" id="addTeacherBtn">Add</button>
+        </div>
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/addstaff.css' %}" />
-
-<script src="{% static 'js/staffPage.js' %}"></script>
-
+<link rel="stylesheet" type="text/css" href="{% static 'styles/addteacher.css' %}" />
+<script src="{% static 'js/addteacher.js' %}"></script>
 {% endblock content %}

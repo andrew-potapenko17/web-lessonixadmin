@@ -1,0 +1,114 @@
+.main-content {
+    display: flex;
+    display: column;
+}
+
+.addteacher .title {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.title img {
+    margin-left: 10px;
+    width: 80px;
+    height: auto;
+}
+
+.addteacher .teacher-form {
+    margin-top: 30px;
+    display: flex;
+    height: 600px;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.addteacher .avatar img {
+    width: 200px;   /* bigger avatar */
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid #000;
+}
+
+.inputs {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.inputs label {
+    font-weight: bold;
+}
+
+.inputs input {
+    border: 2px solid #bbb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 15px;
+    width: 100%;  /* make wider */
+    box-sizing: border-box;
+}
+
+.leftinputs, .rightinputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.multi-input {
+    display: flex;
+    gap: 8px;
+}
+
+.multi-input input {
+    flex: 1;
+}
+
+.multi-input button {
+    width: 40px;
+    height: 40px;
+    background: #3C6E71;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.tag {
+    padding: 6px 14px;
+    background: #eee;
+    border: 1px solid #bbb;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#addTeacherBtn {
+    align-self: center;
+    padding: 14px 45px;
+    background: #3C6E71;
+    border: none;
+    width: 250px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
