@@ -5,43 +5,58 @@
 <div class="mainContent">
     <div class="addteacher">
         <div class="title">
-            <h1>Add Teacher <img src="{% static 'img/book.png' %}" alt="Book"></h1>
+            <span>Add Teacher <img src="{% static 'img/book.png' %}" alt="Book"></span>
         </div>
-
-        <div class="teacher-form">
-            <div class="avatar">
-                <img src="{% static 'img/avatar.png' %}" alt="Avatar">
-            </div>
-
-            <div class="inputs">
-                <div class="leftinputs">
-                    <label>Full Name:</label>
-                    <input type="text" id="teacherName" placeholder="First Last">
-
-                    <label>Class:</label>
-                    <input type="text" id="teacherClass" placeholder="e.g. 7-A">
+        <form method="post" action="{% url 'addstaff' 'teacher' %}">
+            {% csrf_token %}
+            <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+            <div class="teacher-form">
+                <div class="avatar">
+                    <img src="{% static 'img/avatar.png' %}" alt="Avatar">
                 </div>
-                <div class="rightinputs">
-                    <label>Subjects:</label>
-                    <div class="multi-input">
-                        <input type="text" id="subjectInput" placeholder="Enter subject">
-                        <button type="button" onclick="addSubject()">+</button>
+    
+                <div class="inputs">
+                    <div class="leftinputs">
+                        <div class="singleinput">
+                            <label>Full Name:</label>
+                            <input type="text" id="teacherName" placeholder="" required>
+                        </div>
+                        
+                        <div class="singleinput">
+                            <label>Primary class:</label>
+                            <input type="text" id="teacherClass" placeholder="">
+                        </div>
                     </div>
-                    <div id="subjectList" class="tag-list"></div>
-
-                    <label>Rooms:</label>
-                    <div class="multi-input">
-                        <input type="text" id="roomInput" placeholder="Enter room number">
-                        <button type="button" onclick="addRoom()">+</button>
-                    </div>
-                    <div id="roomList" class="tag-list"></div>
-                </div>                
+                    <div class="rightinputs">
+                        <div class="singleinput">
+                            <label>Subjects:</label>
+                            <div class="multi-input">
+                                <input type="text" id="subjectInput" placeholder="" required>
+                                <button type="button" onclick="addSubject()">
+                                    <img src="{% static 'img/plus-btn.png' %}" alt="Add">
+                                </button>
+                            </div>
+                            <div id="subjectList" class="tag-list"></div>
+                        </div>
+    
+                        <div class="singleinput">
+                            <label>Rooms:</label>
+                            <div class="multi-input">
+                                <input type="text" id="roomInput" placeholder="" required>
+                                <button type="button" onclick="addRoom()">
+                                    <img src="{% static 'img/plus-btn.png' %}" alt="Add">
+                                </button>
+                            </div>
+                            <div id="roomList" class="tag-list"></div>
+                        </div>
+                    </div>                
+                </div>
             </div>
-        </div>
-
-        <div class="submit">
-            <button type="button" id="addTeacherBtn">Add</button>
-        </div>
+    
+            <div class="submit">
+                <button type="submit" id="addTeacherBtn">Add</button>
+            </div>
+        </form>
     </div>
 </div>
 

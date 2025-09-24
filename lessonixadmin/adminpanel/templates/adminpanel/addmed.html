@@ -3,21 +3,37 @@
 
 {% block content %}
 <div class="mainContent">
-    <div class="upper">
+    <div class="addmed">
         <div class="title">
-            <span class="titlespan">Add medical worker</span>
+            <span>Add medical worker <img src="{% static 'img/medkit.png' %}" alt="Medkit"></span>
         </div>
-    </div>
-
+        <form method="post" action="{% url 'addstaff' 'med' %}">
+            {% csrf_token %}
+            <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+            <div class="med-form">
+                <div class="avatar">
+                    <img src="{% static 'img/avatar.png' %}" alt="Avatar">
+                </div>
     
-
-    <div class="lower">
-        
+                <div class="inputs">
+                    <div class="leftinputs">
+                        <div class="singleinput">
+                            <label>Full Name:</label>
+                            <input type="text" id="teacherName" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="rightinputs">
+                        
+                    </div>                
+                </div>
+            </div>
+    
+            <div class="submit">
+                <button type="submit" id="addMedBtn">Add</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/addstaff.css' %}" />
-
-<script src="{% static 'js/staffPage.js' %}"></script>
-
+<link rel="stylesheet" type="text/css" href="{% static 'styles/addmed.css' %}" />
 {% endblock content %}

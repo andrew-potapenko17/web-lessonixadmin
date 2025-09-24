@@ -46,17 +46,3 @@ function removeTag(value, type) {
         renderTags("roomList", rooms, "room");
     }
 }
-
-document.getElementById("addTeacherBtn").addEventListener("click", () => {
-    const name = document.getElementById("teacherName").value.trim();
-    const clas = document.getElementById("teacherClass").value.trim();
-
-    console.log("Teacher:", {
-        name: name,
-        class: clas,
-        subjects: subjects,
-        rooms: rooms
-    });
-
-    // TODO: send via fetch() to Django backend
-});
