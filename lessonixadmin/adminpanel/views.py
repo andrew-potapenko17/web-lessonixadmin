@@ -151,7 +151,7 @@ def staffPage(request):
                     'role': info.get('role', 'N/A'),
                 }
                 for code, info in codes.items()
-                if info.get('school_id') == schoolid and info.get('role') == 'teacher'
+                if info.get('school_id') == schoolid
             ]
     except Exception as e:
         print(f"Failed to retrieve personalregistercodes. Error: {str(e)}")
@@ -216,6 +216,43 @@ def addStaffPage(request, type):
         return render(request, 'adminpanel/addteacher.html')
     elif type == "med":
         return render(request, 'adminpanel/addmed.html')
+
+
+@is_authenticated
+def staffProfile(request, stringid: str):
+    schoolid = request.session.get('schoolid')
+
+    context = {}
+
+    if len(stringid) == 7:
+        staff_data = db.child("personalregistercodes").child(stringid).get().val()
+        if not staff_data or staff_data.get('school_id') != schoolid:
+            return HttpResponse("Invalid or unauthorized access to inactive staff profile.", status=403)
+        
+        context.update({
+            "full_name": staff_data.get("full_name", "N/A"),
+            "role": staff_data.get("role", "N/A"),
+            "registercode": stringid,
+            "primary": staff_data.get("primary", "N/A"),
+            "subjects": staff_data.get("subjects", {}),
+            "rooms": staff_data.get("cabs", {}),
+        })
+
+    else:
+        staff_data = db.child("users").child(stringid).get().val()
+        if not staff_data or staff_data.get('school_id') != schoolid:
+            return HttpResponse("Invalid or unauthorized access to staff profile.", status=403)
+
+        context.update({
+            "full_name": staff_data.get("full_name", "N/A"),
+            "role": staff_data.get("role", "N/A"),
+            "primary": staff_data.get("primary", "N/A"),
+            "subjects": staff_data.get("subjects", {}),
+            "rooms": staff_data.get("cabs", {}),
+        })
+
+    return render(request, 'adminpanel/staffprofile.html', context)
+
 
 def login(request):
     if request.method == 'POST':

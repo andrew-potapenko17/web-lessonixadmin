@@ -46,7 +46,9 @@
                 </div>
     
                 <div class="arrow">
-                    <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                    <a href="{% url 'staffprofile' staff.user_id %}">
+                        <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                    </a>
                 </div>
             </div>
         {% endfor %}
@@ -59,19 +61,26 @@
     
                 <div class="info">
                     <div class="name">{{ staff.full_name|default:"N/A" }}</div>
-                    <div class="role">Teacher (inactive)</div>
-                    <div class="class">
-                        Subjects:
-                        {% if staff.subjects %}
-                            {{ staff.subjects|join:", " }}
+                    <div class="role">
+                        {% if staff.role == "teacher" %}
+                            Teacher
+                        {% elif staff.role == "med" %}
+                            Medical worker
                         {% else %}
-                            N/A
+                            Other staff
                         {% endif %}
                     </div>
+                    {% if staff.role == "teacher" %}
+                        <div class="class">
+                            Class: {{ staff.primaryclass|default:"N/A" }}
+                        </div>
+                    {% endif %}
                 </div>
     
                 <div class="arrow">
-                    <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                    <a href="{% url 'staffprofile' staff.register_code %}">
+                        <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                    </a>
                 </div>
             </div>
         {% endfor %}

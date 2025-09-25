@@ -1,0 +1,73 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mainContent">
+    <div class="addteacher">
+        <div class="title">
+            <div class="back-button">
+                <a href={% url 'staff' %}>
+                    <img src="{% static 'img/arrow-left.png' %}" alt="Back">
+                </a>
+            </div>
+            {{ full_name }}
+            <div class="role-icon">
+                {% if role == "teacher" %}
+                    <img src="{% static 'img/book.png' %}" alt="Book">
+                {% elif role == "med" %}
+                    <img src="{% static 'img/medkit.png' %}" alt="Medkit">
+                {% else %}
+                    <img src="{% static 'img/book.png' %}" alt="Other">
+                {% endif %}
+            </div>
+        </div>
+        <div class="teacher-form">
+            <div class="avatar">
+                <img src="{% static 'img/avatar.png' %}" alt="Avatar">
+            </div>
+
+            <div class="inputs">
+                <div class="leftinputs">
+                    <div class="singleinput">
+                        {% if registercode %}
+                            <label>Not registered</label>
+                            <label>Registration code: {{ registercode }}</label>
+                        {% else %}
+                            <label>Registered</label>
+                        {% endif %}
+                    </div>
+                    
+                    {% if role == "teacher" %}
+                        <div class="singleinput">
+                            <label>Primary class: {{ primary }}</label>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="rightinputs">
+                    {% if role == "teacher" %}
+                        <div class="singleinput">
+                            <label>Subjects:</label>
+                            <div id="subjectList" class="tag-list">
+                                {% for subject in subjects %}
+                                    <div class="tag">{{ subject }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="singleinput">
+                            <label>Rooms:</label>
+                            <div id="roomList" class="tag-list">
+                                {% for room in rooms %}
+                                    <div class="tag">{{ room }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/staffprofile.css' %}" />
+{% endblock content %}

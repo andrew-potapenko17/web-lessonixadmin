@@ -1,0 +1,87 @@
+.main-content {
+    display: flex;
+    display: column;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.addteacher .title {
+    font-size: 50px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.back-button img {
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+}
+
+.title img {
+    margin-left: 0px;
+    width: 80px;
+    height: auto;
+}
+
+.addteacher .teacher-form {
+    margin-top: 30px;
+    display: flex;
+    height: 600px;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.addteacher .avatar img {
+    width: 200px;   /* bigger avatar */
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #000;
+    margin-right: 40px;
+}
+
+.inputs {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.inputs label {
+    color: #000;
+    font-weight: bold;
+}
+
+.leftinputs, .rightinputs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+}
+
+.singleinput {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.tag {
+    padding: 8px 12px;
+    border: 2px solid #000;
+    color: #000;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    user-select: none;
+}
