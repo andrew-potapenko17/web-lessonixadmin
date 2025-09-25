@@ -20,15 +20,13 @@
         </div>
     </div>
 
-    
-
     <div class="lower">
         {% for staff in staff_list %}
-            <div class="staff-card {% if staff.inactive %}inactive{% endif %}">
+            <div class="staff-card">
                 <div class="avatar">
                     <img src="{% static 'img/avatar.png' %}" alt="Avatar">
                 </div>
-
+    
                 <div class="info">
                     <div class="name">{{ staff.full_name }}</div>
                     <div class="role">
@@ -46,7 +44,32 @@
                     </div>
                     {% endif %}
                 </div>
-
+    
+                <div class="arrow">
+                    <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
+                </div>
+            </div>
+        {% endfor %}
+    
+        {% for staff in staff_list_inactive %}
+            <div class="staff-card inactive">
+                <div class="avatar">
+                    <img src="{% static 'img/avatar.png' %}" alt="Avatar">
+                </div>
+    
+                <div class="info">
+                    <div class="name">{{ staff.full_name|default:"N/A" }}</div>
+                    <div class="role">Teacher (inactive)</div>
+                    <div class="class">
+                        Subjects:
+                        {% if staff.subjects %}
+                            {{ staff.subjects|join:", " }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </div>
+                </div>
+    
                 <div class="arrow">
                     <img src="{% static 'img/arrow-right.png' %}" alt="Arrow">
                 </div>

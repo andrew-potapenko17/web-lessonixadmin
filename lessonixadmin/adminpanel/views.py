@@ -121,25 +121,49 @@ def addClassPage(request):
 @is_authenticated
 def staffPage(request):
     schoolid = request.session.get('schoolid')
+    staff_list = []
+    staff_list_inactive = []
+
     try:
         users = db.child("users").get().val()
         if users:
             staff_list = [
                 {
-                    'full_name': user_info['full_name'],
+                    'full_name': user_info.get('full_name', 'N/A'),
                     'user_id': user_id,
                     'primaryclass': user_info.get('primaryclass', 'N/A'),
-                    'role': user_info.get('role'),
+                    'role': user_info.get('role', 'N/A'),
                 }
                 for user_id, user_info in users.items()
                 if user_info.get('school_id') == schoolid and user_info.get('role') != 'student'
             ]
-        else:
-            staff_list = []
     except Exception as e:
-        staff_list = []
         print(f"Failed to retrieve users. Error: {str(e)}")
-    return render(request, 'adminpanel/staff.html', context={'staff_list': staff_list})
+
+    try:
+        codes = db.child("personalregistercodes").get().val()
+        if codes:
+            staff_list_inactive = [
+                {
+                    'full_name': info.get('full_name', 'N/A'),
+                    'register_code': code,
+                    'primaryclass': info.get('primary', 'N/A'),
+                    'role': info.get('role', 'N/A'),
+                }
+                for code, info in codes.items()
+                if info.get('school_id') == schoolid and info.get('role') == 'teacher'
+            ]
+    except Exception as e:
+        print(f"Failed to retrieve personalregistercodes. Error: {str(e)}")
+
+    return render(
+        request,
+        'adminpanel/staff.html',
+        context={
+            'staff_list': staff_list,
+            'staff_list_inactive': staff_list_inactive,
+        },
+    )
 
 
 @is_authenticated
@@ -156,7 +180,7 @@ def addStaffPage(request, type):
 
         try:
             if type == "teacher":
-                primary = request.POST.get('teacherClass', '')
+                primary = request.POST.get('primaryClass', '')
                 subjects = request.POST.get('subjects', '')
                 rooms = request.POST.get('rooms', '')
 
@@ -183,10 +207,10 @@ def addStaffPage(request, type):
                     "role": type,
                 })
 
-            return redirect('admin_control_panel')
+            return redirect('staff')
 
         except Exception as e:
-            return redirect('register_personnel')
+            return redirect('staff')
         
     if type == "teacher":
         return render(request, 'adminpanel/addteacher.html')
