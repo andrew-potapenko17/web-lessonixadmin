@@ -144,6 +144,50 @@ def staffPage(request):
 
 @is_authenticated
 def addStaffPage(request, type):
+    if request.method == 'POST':
+        full_name = request.POST.get('teacherName')
+        schoolid = request.session.get('schoolid')
+
+        if not db.child('schools').child(schoolid).get().val():
+            print(request, "Invalid school ID")
+            return redirect('register_personnel')
+
+        register_code = generator.unic(7)
+
+        try:
+            if type == "teacher":
+                primary = request.POST.get('teacherClass', '')
+                subjects = request.POST.get('subjects', '')
+                rooms = request.POST.get('rooms', '')
+
+                subjects_dict = {s.strip(): s.strip() for s in subjects.split(',') if s.strip()}
+                rooms_dict = {r.strip(): r.strip() for r in rooms.split(',') if r.strip()}
+
+                data = {
+                    "full_name": full_name,
+                    "school_id": schoolid,
+                    "role": type,
+                    "subjects": subjects_dict,
+                    "cabs": rooms_dict,
+                }
+
+                if primary:
+                    data["primary"] = primary
+
+                db.child('personalregistercodes').child(str(register_code)).set(data)  
+
+            elif type == "med":
+                db.child('personalregistercodes').child(str(register_code)).set({
+                    "full_name": full_name,
+                    "school_id": schoolid,
+                    "role": type,
+                })
+
+            return redirect('admin_control_panel')
+
+        except Exception as e:
+            return redirect('register_personnel')
+        
     if type == "teacher":
         return render(request, 'adminpanel/addteacher.html')
     elif type == "med":

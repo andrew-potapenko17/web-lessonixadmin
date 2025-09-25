@@ -10,6 +10,8 @@
         <form method="post" action="{% url 'addstaff' 'teacher' %}">
             {% csrf_token %}
             <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+            <input type="hidden" name="subjects" id="subjectsField">
+            <input type="hidden" name="rooms" id="roomsField">
             <div class="teacher-form">
                 <div class="avatar">
                     <img src="{% static 'img/avatar.png' %}" alt="Avatar">
@@ -31,7 +33,7 @@
                         <div class="singleinput">
                             <label>Subjects:</label>
                             <div class="multi-input">
-                                <input type="text" id="subjectInput" placeholder="" required>
+                                <input type="text" id="subjectInput" placeholder="">
                                 <button type="button" onclick="addSubject()">
                                     <img src="{% static 'img/plus-btn.png' %}" alt="Add">
                                 </button>
@@ -42,7 +44,7 @@
                         <div class="singleinput">
                             <label>Rooms:</label>
                             <div class="multi-input">
-                                <input type="text" id="roomInput" placeholder="" required>
+                                <input type="text" id="roomInput" placeholder="">
                                 <button type="button" onclick="addRoom()">
                                     <img src="{% static 'img/plus-btn.png' %}" alt="Add">
                                 </button>
