@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . import cfg
 from . import generator
 from .decorators import is_authenticated
+import json
 import pyrebase
 
 firebase = pyrebase.initialize_app(cfg.config)
@@ -232,7 +233,7 @@ def staffProfile(request, stringid: str):
         context.update({
             "full_name": staff_data.get("full_name", "N/A"),
             "role": staff_data.get("role", "N/A"),
-            "registercode": stringid,
+            "uid": stringid,
             "primary": staff_data.get("primary", "N/A"),
             "subjects": staff_data.get("subjects", {}),
             "rooms": staff_data.get("cabs", {}),
@@ -246,12 +247,90 @@ def staffProfile(request, stringid: str):
         context.update({
             "full_name": staff_data.get("full_name", "N/A"),
             "role": staff_data.get("role", "N/A"),
+            "uid": stringid,
             "primary": staff_data.get("primary", "N/A"),
             "subjects": staff_data.get("subjects", {}),
             "rooms": staff_data.get("cabs", {}),
         })
 
     return render(request, 'adminpanel/staffprofile.html', context)
+
+
+@is_authenticated
+def editStaffPage(request, stringid: str):
+    schoolid = request.session.get('schoolid')
+
+    if request.method == 'POST':
+        # Визначаємо, де зберігається співробітник
+        if len(stringid) == 7:
+            current_data = db.child("personalregistercodes").child(stringid).get().val() or {}
+            staff_type = current_data.get("role")
+            updatepath = db.child("personalregistercodes").child(stringid)
+        else:
+            current_data = db.child("users").child(stringid).get().val() or {}
+            staff_type = current_data.get("role")
+            updatepath = db.child("users").child(stringid)
+
+        # Teacher update
+        if staff_type == "teacher":
+            full_name = request.POST.get('teacherName')
+            primary = request.POST.get('primaryClass', '')
+            subjects = request.POST.get('subjects', '')
+            rooms = request.POST.get('rooms', '')
+
+            subjects_dict = {s.strip(): s.strip() for s in subjects.split(',') if s.strip()}
+            rooms_dict = {r.strip(): r.strip() for r in rooms.split(',') if r.strip()}
+
+            payload = {
+                "full_name": full_name,
+                "subjects": subjects_dict,
+                "cabs": rooms_dict,
+                "primary": primary,
+            }
+
+        # Med update
+        elif staff_type == "med":
+            full_name = request.POST.get('medName')
+            payload = {
+                "full_name": full_name,
+            }
+
+        else:
+            payload = {}
+
+        # Гарантуємо наявність school_id
+        if "school_id" not in current_data:
+            payload["school_id"] = schoolid
+
+        # Часткове оновлення
+        updatepath.update(payload)
+
+        return redirect('staffprofile', stringid)
+
+    # --- GET-запит: віддаємо форму ---
+    context = {}
+
+    if len(stringid) == 7:
+        staff_data = db.child("personalregistercodes").child(stringid).get().val()
+        if not staff_data or staff_data.get('school_id') != schoolid:
+            return HttpResponse("Invalid or unauthorized access to inactive staff profile.", status=403)
+        
+    else:
+        staff_data = db.child("users").child(stringid).get().val()
+        if not staff_data or staff_data.get('school_id') != schoolid:
+            return HttpResponse("Invalid or unauthorized access to staff profile.", status=403)
+
+    # Контекст однаковий для обох випадків
+    context.update({
+        "full_name": staff_data.get("full_name", "N/A"),
+        "role": staff_data.get("role", "N/A"),
+        "uid": stringid,
+        "primary": staff_data.get("primary", "N/A"),
+        "subjects": staff_data.get("subjects", {}),
+        "rooms": staff_data.get("cabs", {}),
+    })
+
+    return render(request, 'adminpanel/editstaff.html', context)
 
 
 def login(request):

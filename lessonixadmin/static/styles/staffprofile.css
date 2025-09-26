@@ -6,7 +6,6 @@
 .title {
     display: flex;
     flex-direction: row;
-    gap: 20px;
 }
 
 .addteacher .title {
@@ -15,6 +14,12 @@
     display: flex;
     align-items: center;
     margin-bottom: 50px;
+}
+
+.name {
+    display: flex;
+    flex: 0 0 93%;
+    gap: 20px;
 }
 
 .back-button img {

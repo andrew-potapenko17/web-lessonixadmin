@@ -5,9 +5,20 @@
 <div class="mainContent">
     <div class="addteacher">
         <div class="title">
-            <span>Add Teacher <img src="{% static 'img/book.png' %}" alt="Book"></span>
+            <span>
+                {% if role == "teacher" %}
+                    Edit teacher 
+                    <img src="{% static 'img/book.png' %}" alt="Book">
+                {% elif role == "med" %}
+                    Edit medical worker 
+                    <img src="{% static 'img/medkit.png' %}" alt="Medkit">
+                {% else %}
+                    Edit staff 
+                    <img src="{% static 'img/book.png' %}" alt="Other">
+                {% endif %}
+            </span>
         </div>
-        <form method="post" action="{% url 'addstaff' 'teacher' %}">
+        <form method="post" action="{% url 'editstaff' uid %}">
             {% csrf_token %}
             <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
             <input type="hidden" name="subjects" id="subjectsField">
@@ -21,15 +32,17 @@
                     <div class="leftinputs">
                         <div class="singleinput">
                             <label>Full Name:</label>
-                            <input type="text" name="teacherName" id="teacherName" placeholder="" required>
+                            <input type="text" name="teacherName" id="teacherName" placeholder="" value={{ full_name }} required>
                         </div>
-                        
+                        {% if role == "teacher" %}
                         <div class="singleinput">
                             <label>Primary class:</label>
-                            <input type="text" name="primaryClass" id="teacherClass" placeholder="">
+                            <input type="text" name="primaryClass" id="teacherClass" value={{ primary }} placeholder="">
                         </div>
+                        {% endif %}
                     </div>
                     <div class="rightinputs">
+                        {% if role == "teacher" %}
                         <div class="singleinput">
                             <label>Subjects:</label>
                             <div class="multi-input">
@@ -51,17 +64,33 @@
                             </div>
                             <div id="roomList" class="tag-list"></div>
                         </div>
+                        {% endif %}
                     </div>                
                 </div>
             </div>
     
             <div class="submit">
-                <button type="submit" id="addTeacherBtn">Add</button>
+                <button type="submit" id="addTeacherBtn">Edit</button>
             </div>
         </form>
     </div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/addteacher.css' %}" />
-<script src="{% static 'js/addstaff.js' %}"></script>
+
+<script>
+    {% if role == "teacher" %}
+    let subjects = [];
+    let rooms = [];
+
+    {% for sub in subjects %}
+        subjects.push("{{ sub }}");
+    {% endfor %}
+
+    {% for room in rooms %}
+        rooms.push("{{ room }}");
+    {% endfor %}
+    {% endif %}
+</script>
+<script src="{% static 'js/editstaff.js' %}"></script>
 {% endblock content %}

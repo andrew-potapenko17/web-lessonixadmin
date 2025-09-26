@@ -5,20 +5,27 @@
 <div class="mainContent">
     <div class="addteacher">
         <div class="title">
-            <div class="back-button">
-                <a href={% url 'staff' %}>
-                    <img src="{% static 'img/arrow-left.png' %}" alt="Back">
-                </a>
+            <div class="name">
+                <div class="back-button">
+                    <a href={% url 'staff' %}>
+                        <img src="{% static 'img/arrow-left.png' %}" alt="Back">
+                    </a>
+                </div>
+                {{ full_name }}
+                <div class="role-icon">
+                    {% if role == "teacher" %}
+                        <img src="{% static 'img/book.png' %}" alt="Book">
+                    {% elif role == "med" %}
+                        <img src="{% static 'img/medkit.png' %}" alt="Medkit">
+                    {% else %}
+                        <img src="{% static 'img/book.png' %}" alt="Other">
+                    {% endif %}
+                </div>
             </div>
-            {{ full_name }}
-            <div class="role-icon">
-                {% if role == "teacher" %}
-                    <img src="{% static 'img/book.png' %}" alt="Book">
-                {% elif role == "med" %}
-                    <img src="{% static 'img/medkit.png' %}" alt="Medkit">
-                {% else %}
-                    <img src="{% static 'img/book.png' %}" alt="Other">
-                {% endif %}
+            <div class="editbutton">
+                <a href={% url 'editstaff' uid %}>
+                    <img src="{% static 'img/edit-ico.png' %}" alt="Edit">
+                </a>
             </div>
         </div>
         <div class="teacher-form">
@@ -29,9 +36,9 @@
             <div class="inputs">
                 <div class="leftinputs">
                     <div class="singleinput">
-                        {% if registercode %}
+                        {% if uid|length == 7 %}
                             <label>Not registered</label>
-                            <label>Registration code: {{ registercode }}</label>
+                            <label>Registration code: {{ uid }}</label>
                         {% else %}
                             <label>Registered</label>
                         {% endif %}
