@@ -72,7 +72,6 @@ def addClassPage(request):
         #students_list = request.session.get('students', [])
         
         try:
-            print(" Test #1")
             class_name = f"{str(class_digit)}-{str(class_letter)}"
 
             student_ids = []
@@ -82,15 +81,11 @@ def addClassPage(request):
 
                 registration_code = generator.unic(length=16)
 
-                print(" Test #2")
-
                 db.child("registercodes").child(registration_code).set({
                     "student_id": student_id,
                     "class": class_name,
                     "schoolID": schoolid
                 })
-
-                print(" Test #3")
 
                 db.child("students").child(schoolid).child(student_id).set({
                     "full_name": full_name,
@@ -100,8 +95,6 @@ def addClassPage(request):
                     "studentStatus": "outschool",
                     "class": class_name,
                 })
-
-            print(" Test #4")
 
             db.child("school_classes").child(schoolid).child(class_name).set({
                 "class": class_digit,
@@ -114,7 +107,6 @@ def addClassPage(request):
             
             return redirect('classes')
         except Exception as e:
-            print(e)
             return redirect('addclass')
 
     return render(request, 'adminpanel/addclass.html')
@@ -132,7 +124,7 @@ def staffPage(request):
                 {
                     'full_name': user_info.get('full_name', 'N/A'),
                     'user_id': user_id,
-                    'primaryclass': user_info.get('primaryclass', 'N/A'),
+                    'primaryclass': user_info.get('primary', 'N/A'),
                     'role': user_info.get('role', 'N/A'),
                 }
                 for user_id, user_info in users.items()
@@ -261,7 +253,6 @@ def editStaffPage(request, stringid: str):
     schoolid = request.session.get('schoolid')
 
     if request.method == 'POST':
-        # Визначаємо, де зберігається співробітник
         if len(stringid) == 7:
             current_data = db.child("personalregistercodes").child(stringid).get().val() or {}
             staff_type = current_data.get("role")
@@ -290,7 +281,7 @@ def editStaffPage(request, stringid: str):
 
         # Med update
         elif staff_type == "med":
-            full_name = request.POST.get('medName')
+            full_name = request.POST.get('teacherName')
             payload = {
                 "full_name": full_name,
             }
@@ -298,7 +289,6 @@ def editStaffPage(request, stringid: str):
         else:
             payload = {}
 
-        # Гарантуємо наявність school_id
         if "school_id" not in current_data:
             payload["school_id"] = schoolid
 
@@ -307,7 +297,6 @@ def editStaffPage(request, stringid: str):
 
         return redirect('staffprofile', stringid)
 
-    # --- GET-запит: віддаємо форму ---
     context = {}
 
     if len(stringid) == 7:
@@ -329,6 +318,8 @@ def editStaffPage(request, stringid: str):
         "subjects": staff_data.get("subjects", {}),
         "rooms": staff_data.get("cabs", {}),
     })
+
+    print(context)
 
     return render(request, 'adminpanel/editstaff.html', context)
 
